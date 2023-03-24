@@ -176,9 +176,9 @@ class Combat:
     def damage(self, name = ""):
         if (name == "") or (name not in self.monsters):
             for monsters in self.monsters:
-                print({monsters.name}, end=" ")
+                print({monsters.name.sprip("{}")}, end=" ")
             for monsters in self.legendary_monsters:
-                print({monsters.name}, end = " ")
+                print({monsters.name.strip("{}")}, end = " ")
             print(" ")
             creature_damaged = ""
     
@@ -297,26 +297,36 @@ def main():
             print("Please enter a number")
 
 
-    player1 = Player("Crazey")
-    combat.players.append(player1)
-    combat.player_characters.append(player1)
+    # player1 = Player("Crazey")
+    # combat.players.append(player1)
+    # combat.player_characters.append(player1)
 
-    player2 = Player("Dwallin")
-    combat.players.append(player2)
-    combat.player_characters.append(player2)
+    # player2 = Player("Dwallin")
+    # combat.players.append(player2)
+    # combat.player_characters.append(player2)
 
-    player3 = Player("Eleody")
-    combat.players.append(player3)
-    combat.player_characters.append(player3)
+    # player3 = Player("Eleody")
+    # combat.players.append(player3)
+    # combat.player_characters.append(player3)
 
-    player4 = Player("Ebony")
-    combat.players.append(player4)
-    combat.player_characters.append(player4)
+    # player4 = Player("Ebony")
+    # combat.players.append(player4)
+    # combat.player_characters.append(player4)
 
-    player5 = Player("Forg")
-    combat.players.append(player5)
-    combat.player_characters.append(player5)
+    # player5 = Player("Forg")
+    # combat.players.append(player5)
+    # combat.player_characters.append(player5)
 
+    def makeplayer(name):
+        player = Player(name)
+        combat.players.append(player)
+        combat.player_characters.append(player)
+
+    player_count = int(input("How many player are there: "))
+    for _ in player_count:
+        name = input("Enter the PC's name: ")
+        makeplayer(name)
+    print(combat.players)
     for _ in range(number_of_monster_types):
         combat.add_monster_type()
     if number_of_monster_types == 1:
