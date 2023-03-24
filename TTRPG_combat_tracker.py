@@ -1,5 +1,5 @@
 from operator import attrgetter
-# import os
+
 
 class Monster:
     def __init__(self, name, ancestry):
