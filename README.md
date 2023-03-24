@@ -1,4 +1,4 @@
-# D-D-tracker
+# TTRPG-combat-tracker
 
 this is just a passion project of mine, hopefully the instructions are strait forward enough
 
