@@ -33,7 +33,7 @@ class Player:
   def show(self):
     print(self.name + " : " + str(self.initiative))
 
-class Party:
+class Combat:
     players = []
     monsters = []
     player_characters = []
@@ -90,10 +90,21 @@ class Party:
         while True:
             try:
                 name = input("Enter the legendary monsters name: ").title()
-                health = int(input(f"How much health does {name} have: "))
+
                 break
             except ValueError:
-                print("Try again, you need a string and an int")
+                print("Enter a name")
+        while True:
+            try:
+                while True:
+                    health = int(input(f"How much health does {name} have: "))
+                    if health > 0:
+                        break
+                    else:
+                        print("Enter a positive number")
+                break
+            except ValueError:
+                print("Enter a number")
         legend = legendary_monster(name, health)
         self.players.append(legend)
         self.legendary_monsters.append(legend)
@@ -244,7 +255,7 @@ class Other_vareables:
         self.number = 1
     def update_ancestry(self, ancestry):
         self.last_ancestry = ancestry
-party = Party()
+combat = Combat()
 
 other_vareables = Other_vareables()
 
@@ -287,43 +298,43 @@ def main():
 
 
     player1 = Player("Crazey")
-    party.players.append(player1)
-    party.player_characters.append(player1)
+    combat.players.append(player1)
+    combat.player_characters.append(player1)
 
     player2 = Player("Dwallin")
-    party.players.append(player2)
-    party.player_characters.append(player2)
+    combat.players.append(player2)
+    combat.player_characters.append(player2)
 
     player3 = Player("Eleody")
-    party.players.append(player3)
-    party.player_characters.append(player3)
+    combat.players.append(player3)
+    combat.player_characters.append(player3)
 
     player4 = Player("Ebony")
-    party.players.append(player4)
-    party.player_characters.append(player4)
+    combat.players.append(player4)
+    combat.player_characters.append(player4)
 
     player5 = Player("Forg")
-    party.players.append(player5)
-    party.player_characters.append(player5)
+    combat.players.append(player5)
+    combat.player_characters.append(player5)
 
     for _ in range(number_of_monster_types):
-        party.add_monster_type()
+        combat.add_monster_type()
     if number_of_monster_types == 1:
         for _ in range(number_of_monsters):
-            party.add_monster(party.monster_races[0].name)
+            combat.add_monster(combat.monster_races[0].name)
     else:
         for _ in range(number_of_monsters):
-            party.add_monster()
+            combat.add_monster()
     for _ in range(number_of_legends):
-        party.add_legend()
-    party.set_monster_health()
-    party.get_initiatives()
-    party.show()
+        combat.add_legend()
+    combat.set_monster_health()
+    combat.get_initiatives()
+    combat.show()
 
-    while len(party.monsters) > 0:
-        party.play() 
-    while len(party.legendary_monsters) >0:
-        party.play()
+    while len(combat.monsters) > 0:
+        combat.play() 
+    while len(combat.legendary_monsters) >0:
+        combat.play()
     print("Combat is done")
 
 
