@@ -2,7 +2,8 @@
 
 this is just a passion project of mine, hopefully the instructions are strait forward enough
 
-to change the PCs you have to go into the code and change the names "Crazey", "Dwallin", "Eleody", "Ebony", and "Forg" (lines 300-318) 
+to change the PCs you have to replace the names in the file "PC names.txt"
 
+to add more PCs just add them to PC names.txt seperated by commas
 
-if you have less players than me just deleate the three lines of code pertaining to them (ex: lines 300-302)
+to remove PCs just remove the name from PC names.txt

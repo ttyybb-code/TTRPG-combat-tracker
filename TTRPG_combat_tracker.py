@@ -309,27 +309,6 @@ def main():
             print("Please enter a number")
 
 
-    player1 = Player("Crazey")
-    combat.players.append(player1)
-    combat.player_characters.append(player1)
-
-    player2 = Player("Dwallin")
-    combat.players.append(player2)
-    combat.player_characters.append(player2)
-
-    player3 = Player("Eleody")
-    combat.players.append(player3)
-    combat.player_characters.append(player3)
-
-    player4 = Player("Ebony")
-    combat.players.append(player4)
-    combat.player_characters.append(player4)
-
-    player5 = Player("Forg")
-    combat.players.append(player5)
-    combat.player_characters.append(player5)
-
-
     for _ in range(number_of_monster_types):
         combat.add_monster_type()
     if number_of_monster_types == 1:
@@ -340,6 +319,16 @@ def main():
             combat.add_monster()
     for _ in range(number_of_legends):
         combat.add_legend()
+
+    with open("PC names.txt") as file:
+        file_contents = file.read()
+        names = file_contents.split(",")
+        for name in names:
+            name = name.strip()
+            player = Player(name.title())
+            combat.players.append(player)
+            combat.player_characters.append(player)
+
     combat.set_monster_health()
     combat.get_initiatives()
     combat.show()
