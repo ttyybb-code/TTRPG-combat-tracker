@@ -298,20 +298,7 @@ def main():
             print("Please enter a number")
 
 
-    while True:
-        try:
-            are_monsters = ""
-            while (are_monsters != "y") and (are_monsters != "n"):
-                are_monsters = input("Are ther non-legendary monsters (y/n): ").lower()
-                if are_monsters == "y":
-                    are_monsters = True
-                elif are_monsters == "n":
-                    are_monsters = False
-                else:
-                    print("Please enter \"y\" or \"n\"")
-            break
-        except ValueError:
-            print("Please enter \"y\" or \"n\"")
+
 
 
     while True:
