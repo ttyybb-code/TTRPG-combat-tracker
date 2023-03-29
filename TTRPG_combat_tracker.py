@@ -313,15 +313,14 @@ def main():
         except ValueError:
             print("Please enter \"y\" or \"n\"")
 
-    if are_monsters:
-        while True:
-            try:
-                number_of_monster_types = int(input("How many monster types are there: "))
-                break
-            except ValueError:
-                print("Please enter a number")
-    else:
-        number_of_monster_types = 0
+
+    while True:
+        try:
+            number_of_monster_types = int(input("How many monster types are there (not including legendary monsters): "))
+            break
+        except ValueError:
+            print("Please enter a number")
+
 
     for _ in range(number_of_monster_types):
         combat.add_monster_type()  
