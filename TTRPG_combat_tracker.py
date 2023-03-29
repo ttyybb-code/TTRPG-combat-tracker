@@ -38,6 +38,7 @@ class Combat:
     monsters = []
     player_characters = []
     monster_races = []
+    monster_race_names = []
     legendary_monsters = []
     monster_names = []
     players_out_of_turn_order = []
@@ -120,9 +121,13 @@ class Combat:
         self.legendary_monsters.append(legend)
         self.monster_names.append(legend.name)
     def add_monster_type(self):
+        name = ""
         while True:
             try:
-                name = input("Enter a race for the monsters: ").title().strip()
+                while (name in self.monster_race_names) or (name == ""):
+                    name = input("Enter a race for the monsters: ").title().strip()
+                    if (name in self.monster_race_names):
+                        print(f"{name} already exsists, enter a new race")
                 break
             except ValueError:
                 print("Try again, you need a string")
@@ -137,6 +142,7 @@ class Combat:
         monster = Monster_type(name, health)
         self.monster_races.append(monster)
         self.players.append(monster)
+        self.monster_race_names.append(name)
     def set_monster_health(self):
         for monster_race in self.monster_races:
             for monster in self.monsters:
@@ -281,6 +287,7 @@ combat = Combat()
 
 other_vareables = Other_vareables()
 
+
 def main():
 
     while True:
@@ -293,44 +300,46 @@ def main():
 
     while True:
         try:
-            number_of_monsters = -1
-            while number_of_monsters < 0:
-                number_of_monsters = int(input("How many monsters are there (counts seprate from legendary creatures): "))
-                if number_of_monsters < 0:
-                    print("Enter a positive number")
+            are_monsters = ""
+            while (are_monsters != "y") and (are_monsters != "n"):
+                are_monsters = input("Are ther non-legendary monsters (y/n): ").lower()
+                if are_monsters == "y":
+                    are_monsters = True
+                elif are_monsters == "n":
+                    are_monsters = False
+                else:
+                    print("Please enter \"y\" or \"n\"")
             break
         except ValueError:
-            print("Please enter a number")
-    if number_of_monsters != 0:
-        min_monster_types = 1
+            print("Please enter \"y\" or \"n\"")
+
+    if are_monsters:
+        while True:
+            try:
+                number_of_monster_types = int(input("How many monster types are there: "))
+                break
+            except ValueError:
+                print("Please enter a number")
     else:
-        min_monster_types = 0
-
-
-    while True:
-        try:
-            if number_of_monsters != 0:
-                number_of_monster_types = -1
-            else:
-                number_of_monster_types = 0
-            while number_of_monster_types < min_monster_types:
-                number_of_monster_types = int(input("How many monster races are there: "))
-
-                if number_of_monster_types < min_monster_types:
-                    print(f"Enter a value greater than or equal to {min_monster_types}")
-            break
-        except ValueError:
-            print("Please enter a number")
-
+        number_of_monster_types = 0
 
     for _ in range(number_of_monster_types):
-        combat.add_monster_type()
-    if number_of_monster_types == 1:
-        for _ in range(number_of_monsters):
-            combat.add_monster(combat.monster_races[0].name)
-    else:
-        for _ in range(number_of_monsters):
-            combat.add_monster()
+        combat.add_monster_type()  
+
+
+    for race in combat.monster_race_names:
+        while True:
+            try:
+                    number = int(input(f"How many {race}s are there: "))
+                    total += number
+            except ValueError:
+                print("Enter a number")
+    for _ in range(number):
+        combat.add_monster(race)
+        
+
+
+
     for _ in range(number_of_legends):
         combat.add_legend()
 
