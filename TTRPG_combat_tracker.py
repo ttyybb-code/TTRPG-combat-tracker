@@ -316,14 +316,13 @@ def main():
     for race in combat.monster_race_names:
         while True:
             try:
-                    number = int(input(f"How many {race}s are there: "))
-                    total += number
+                number = int(input(f"How many {race}s are there: "))
+                break
             except ValueError:
                 print("Enter a number")
-    for _ in range(number):
-        combat.add_monster(race)
+        for _ in range(number):
+            combat.add_monster(race)
         
-
 
 
     for _ in range(number_of_legends):
