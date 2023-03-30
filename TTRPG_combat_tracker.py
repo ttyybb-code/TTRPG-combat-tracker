@@ -11,7 +11,7 @@ class Monster:
         print(self.name + " : " + str(self.initiative))
 
 class legendary_monster:
-    lose_tie = 0
+    tie_break = 0
     def __init__(self, name, health):
         self.name = name
         self.health = health
@@ -20,7 +20,7 @@ class legendary_monster:
         print(self.name + " : " + str(self.initiative))
 
 class Monster_type:
-    lose_tie = 0
+    tie_break = 0
     def __init__(self, name, health):
         self.name = name
         self.initiative = 0
@@ -29,7 +29,7 @@ class Monster_type:
         print(self.name + " : " + str(self.initiative))
 
 class Player:
-  lose_tie = 0
+  tie_break = 0
   def __init__(self, name):
     self.name = name
     self.initiative = 0
@@ -64,7 +64,8 @@ class Combat:
                         print("Please enter a number")
         self.players.sort(key=attrgetter('initiative'), reverse=True)
         self.resolve_tie()
-        self.players.sort(key=attrgetter('initiative', "lose_tie"), reverse=True)
+        self.players.sort(key=attrgetter('initiative', "tie_break"), reverse=True)
+    
     def resolve_tie(self):
         old = 0
         for  i, player in enumerate(self.players):
@@ -83,7 +84,9 @@ class Combat:
                     except ValueError:
                         print(f"Enter \"{old.name}\" or \"{player.name}\"")
                 if goes_first == player.name:
-                    self.players.insert(i - 1, self.players.pop(i))
+                    player.tie_break += 1
+                elif goes_first == player.name:
+                    old.tie_break += 1
             old = player
 
             
@@ -297,7 +300,7 @@ class Combat:
 
         for _ in range(number_of_monsters):
             self.add_monster(race)
-        self.players.sort(key=attrgetter('initiative', "lose_tie"), reverse=True)
+        self.players.sort(key=attrgetter('initiative', "tie_break"), reverse=True)
     def change_initiative(self, num):
         self.players_out_of_turn_order.append(self.players.pop(num))
         return "end"
