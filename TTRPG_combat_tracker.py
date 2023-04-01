@@ -214,7 +214,7 @@ class Combat:
 
     def turn_menu(self, turn_num):
         action = ""
-        print("Enter \"damage\", \"add\", \"change initiative\",\"show\" or \"end\" when done")
+        print("Enter \"damage\", \"add\", \"Hold turn\",\"show\" or \"end\" when done")
         while (action != "end"):
             while True:
                 try:
@@ -226,12 +226,12 @@ class Combat:
                 self.damage()
             elif action == "add":
                 self.add_monster_to_initiative()
-            elif action == "change initiative":
-                action = self.change_initiative(turn_num)
+            elif action == "hold turn":
+                action = self.hold_turn(turn_num)
             elif action == "show":
                 self.show()
             else:
-                print("Enter \"damage\", \"add\", \"change initiative\" or end when done")
+                print("Enter \"damage\", \"add\", \"Hold turn\" or end when done")
     def damage(self, name = ""):
         if (name == "") or (name not in self.monsters):
             for monsters in self.monsters:
@@ -301,7 +301,7 @@ class Combat:
         for _ in range(number_of_monsters):
             self.add_monster(race)
         self.players.sort(key=attrgetter('initiative', "tie_break"), reverse=True)
-    def change_initiative(self, num):
+    def hold_turn(self, num):
         self.players_out_of_turn_order.append(self.players.pop(num))
         return "end"
 
