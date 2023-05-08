@@ -187,15 +187,18 @@ class Combat:
                 self.turn_menu(num)
             else:
                 while True:
-                    damage = input("Was this creature damaged during its turn (y/n): ").lower()
-                    if damage == "y":
-                        self.damage(player)
-                        break
-                    elif damage == "n":
-                        break
-                    else:
-                        print("enter \"y\" or \"n\"")
-                        print()
+                    damage = ""
+                    while damage != "n":
+                        damage = input("Was this creature damaged during its turn (y/n): ").lower()
+            
+                        if damage == "y":
+                            self.damage(player)
+                            break
+                        elif damage == "n":
+                            break
+                        else:
+                            print("enter \"y\" or \"n\"")
+                            print()
             if len(self.players_out_of_turn_order) != 0:
                 for i, object in enumerate(self.players_out_of_turn_order):
                     while True:
