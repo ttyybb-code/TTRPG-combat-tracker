@@ -2,9 +2,9 @@ from operator import attrgetter
 
 
 class Monster:
-    def __init__(self, name, ancestry):
+    def __init__(self, name, ancestry, initiative = 0):
         self.name = name
-        self.initiative = 0
+        self.initiative = initiative
         self.health = 0
         self.ancestry = ancestry
     def show(self):
@@ -12,18 +12,18 @@ class Monster:
 
 class legendary_monster:
     tie_break = 0
-    def __init__(self, name, health):
+    def __init__(self, name, health, initiative = 0):
         self.name = name
         self.health = health
-        self.initiative = 0
+        self.initiative = initiative
     def show(self):
         print(self.name + " : " + str(self.initiative))
 
 class Monster_type:
     tie_break = 0
-    def __init__(self, name, health):
+    def __init__(self, name, health, initiative = 0):
         self.name = name
-        self.initiative = 0
+        self.initiative = initiative
         self.health = health
     def show(self):
         print(self.name + " : " + str(self.initiative))
@@ -151,7 +151,7 @@ class Combat:
         self.players.append(legend)
         self.legendary_monsters.append(legend)
         self.monster_names.append(legend.name)
-    def add_monster_type(self):
+    def add_monster_type(self, initiative = 0):
         name = ""
         while True:
             try:
@@ -169,8 +169,8 @@ class Combat:
                     health = int(input("What is the races health: "))
                 break
             except ValueError:
-                print("Try again, you need an int")
-        monster = Monster_type(name, health)
+                print("Try again, you need a number")
+        monster = Monster_type(name, health, initiative)
         self.monster_races.append(monster)
         self.players.append(monster)
         self.monster_race_names.append(name)
@@ -275,34 +275,39 @@ class Combat:
             print("Combat is over")
             quit()
     def add_monster_to_initiative(self):
+        new_creatures_race = ""
         while True:
             try:
-                new_race = ""
-                while True:
-                    new_race = input("Is a new race entering combat? (y/n) ").lower()
-                    if new_race == "y" or new_race == "n":
-                        break
+                is_new_race = ""
+                while is_new_race != "y" and is_new_race !="n":
+                    is_new_race = input("Is a new race entering combat? (y/n) ").lower()
                 break
             except ValueError:
-                print("Please enter a string")
+                print("Please enter a \"\" or \"n\"")
         while True:
             try:
                 number_of_monsters = int(input("How many new monsters: "))
                 break
             except ValueError:
                 print("Please enter a number")
-        if new_race == "y":
-            self.add_monster_type()
-        elif new_race == "n":
-            while True:
+        if is_new_race == "y":
+            initiative = -10
+            while initiative < 0:
                 try:
-                    race = input("Enter the race of the creatures: ").title()
-                    break
+                    initiative = int(input("what initiative is the creature acting on: "))
+                except ValueError:
+                    print("Enter a number")
+            self.add_monster_type(initiative)
+        elif is_new_race == "n":
+            while new_creatures_race not in self.monster_race_names:
+                try:
+                    new_creatures_race = input("Enter the race of the creatures: ").title()
+                    if new_creatures_race not in self.monster_race_names:
+                        print(f"The available races are {self.monster_race_names} ")
                 except ValueError:
                     print("Please enter a string")
-
         for _ in range(number_of_monsters):
-            self.add_monster(race)
+            self.add_monster(new_creatures_race)
         self.players.sort(key=attrgetter('initiative', "tie_break"), reverse=True)
     def hold_turn(self, num):
         self.players_out_of_turn_order.append(self.players.pop(num))
