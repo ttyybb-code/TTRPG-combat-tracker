@@ -4,7 +4,7 @@
 
 **Project Description**: A program to help GMs track combat and monster health
 
-**Project Goals**: Conferm a given IDE is functioning properly
+**Project Goals**: Have one program to track monster health, and initiative
 
 ## Instuctions for Build and Use:
 
