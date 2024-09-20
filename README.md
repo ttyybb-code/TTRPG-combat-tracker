@@ -1,13 +1,36 @@
-# TTRPG-combat-tracker
+## Overview
 
-this is just a passion project of mine, hopefully the instructions are strait forward enough.
+**Project Title**: TTRPG combat tracker
 
-for the purpses of this program, a legendary creature is any creature with a unique name.
+**Project Description**: A program to help GMs track combat and monster health
 
-this program works by getting the name/health of a race and applies that to all monsters with the same race. Legendary creatures  have their own unique health pool.
+**Project Goals**: Conferm a given IDE is functioning properly
 
-to change the PCs you have to replace the names in the file "PC names.txt"
+## Instuctions for Build and Use:
 
-to add more PCs just add them to "PC names.txt" seperated by commas
+steps to build and/or run the software:
 
-to remove PCs just remove the name from "PC names.txt"
+1. on windows, open the terminal and run 'py TTRPG_combat_tracker' on linux, run 'python3 TTRPG_combat_tracker'
+
+
+## Instructions for using the software:
+
+1. adjust PC names.txt to be a list of the player charitcters names, seperated by commas.
+
+
+
+## Development Environment 
+
+To recreate the development environment, you need the following software and/or libraries with the specified versions:
+
+* VS code 
+* python 3.12.4
+
+
+## Useful Websites to Learn More
+
+I found these websites useful in developing this software:
+
+* [W3schools](https://www.w3schools.com/python/)
+
+
